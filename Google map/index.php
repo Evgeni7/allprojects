@@ -16,11 +16,16 @@
 </head>
 <body>
 
-
+<form method="post">
+Country: <input type="text" name="country">
+Region: <input type="text" name="region"><br>
+LAT: <input type="text" name="lat">
+LNG: <input type="text" name="lng">
+<input type="submit">
+</form>
 
 
 <?php
-
 $link = mysqli_connect('localhost', 'wordpressuser', 'Passw0rd!', 'map');
 if (!$link) 
 {
@@ -28,35 +33,34 @@ if (!$link)
 	echo $output;	
 	exit();
        
-}
 
-$maxid = "SELECT * FROM list";
+
+}
+if ($_POST["region"] == null){
+$maxid = "SELECT * FROM list where country = '".$_POST["country"]."' or lat = '".$_POST["lat"]."' or lng = '".$_POST["lng"]."'";
 $result = $link->query($maxid);
 $row = $result->fetch_assoc();
-
-
-//$maxid = (int)$row['max(id)'];
-//echo $maxid;
-//echo "       ";
-
-//$lat = array($maxid);
-/*for ($counter = 1; $counter < $maxid; $counter++)
+echo $_POST["country"];
+echo " ";
+echo $_POST["lat"];
+echo " ";
+echo $_POST["lng"];
+}
+else
 {
-
-$id = "SELECT * FROM list WHERE id=$counter";
-$result = $link->query($id);
+$maxid = "SELECT * FROM list where region = '".$_POST["region"]."' or country = '".$_POST["country"]."' or lat = '".$_POST["lat"]."' or lng = '".$_POST["lng"]."'";
+$result = $link->query($maxid);
 $row = $result->fetch_assoc();
-$lat = (double)$row['lat'];
-$lng = (double)$row['lng'];
-echo $lat[1];
-echo $lat[2];
-echo $lat[3];
+echo $_POST["country"];
+echo " ";
+echo $_POST["region"];
+echo " ";
+echo $_POST["lat"];
+echo " ";
+echo $_POST["lng"];
+}
 
 
-echo "     ";
-echo $lng; 
-echo "   END   ";
-} */
 ?>
 
 
@@ -85,7 +89,7 @@ echo "   END   ";
         var marker = new google.maps.Marker({
             position: location,
             map: map,
-	    title: '<?php echo $result['name']; ?>'
+	    title: '<?php echo $result['url']; ?>'
         });
     <?php } ?>
 
