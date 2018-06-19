@@ -1,34 +1,57 @@
-#not working properly
+import copy
+
 k = raw_input("Number of rows:")
 l = raw_input("Number of columns:")
 r = raw_input("Number of days:")
-sb1 = [0] * 2
-sb2 = [0] * 2
-sb1 = raw_input("Strawberrie one:")
-sb2 = raw_input("Strawberrie two:")
+sb11 = raw_input("Strawberrie one row:")
+sb12 = raw_input("Strawberrie one column:")
+sb21 = raw_input("Strawberrie two row:")
+sb22 = raw_input("Strawberrie two column:")
 
 
-print sb1
+
 a = [[0 for x in range(int(k))] for y in range(int(l))] 
-a[int(sb1[0])][int(sb1[1])] = 1
-a[int(sb2[0])][int(sb2[1])] = 1
+a[int(sb11)-1][int(sb12)-1] = 1
+a[int(sb21)-1][int(sb22)-1] = 1
+b = [[0 for x in range(int(k))] for y in range(int(l))]
+b[int(sb11)-1][int(sb12)-1] = 1
+b[int(sb21)-1][int(sb22)-1] = 1
 
-#for x in range(k):
-#	for y in range(l):
-for i in range(int(r)-1):
+
+for i in range(int(r)):
 	for x in range(int(k)):
 		for y in range(int(l)):
-			if a[x][y] == 1:
-				try:
-					a[x][y+1] = 1
-					a[x][y-1] = 1
-					a[x-1][y] = 1
-					a[x+1][y] = 1
-				except:
-					print ("")
+			try:
+				if a[x][y] == 1:
+					b[x+1][y]= 1
+			except IndexError:
+				pass
+			try:			
+				if a[x][y+1] == 1:
+					b[x][y] = 1
+			except IndexError:
+				pass
+			try:
+				if a[x][y] == 1:
+					b[x][y+1]= 1
+			except IndexError:
+				pass
+			try:			
+				if a[x][y+1] == 1:
+					b[x][y] = 1
+			except IndexError:
+				pass
+	a = copy.deepcopy(b)
+
+			
 count = 0
 for x in range(int(k)):
 	for y in range(int(l)):
-		if a[x][y] == 0:
-			count = count + 1
+		try:
+			if a[x][y] == 0:
+				count = count + 1
+		except IndexError:
+			pass
+print a
 print count
+
