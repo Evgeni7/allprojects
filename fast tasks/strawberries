@@ -1,0 +1,34 @@
+#not working properly
+k = raw_input("Number of rows:")
+l = raw_input("Number of columns:")
+r = raw_input("Number of days:")
+sb1 = [0] * 2
+sb2 = [0] * 2
+sb1 = raw_input("Strawberrie one:")
+sb2 = raw_input("Strawberrie two:")
+
+
+print sb1
+a = [[0 for x in range(int(k))] for y in range(int(l))] 
+a[int(sb1[0])][int(sb1[1])] = 1
+a[int(sb2[0])][int(sb2[1])] = 1
+
+#for x in range(k):
+#	for y in range(l):
+for i in range(int(r)-1):
+	for x in range(int(k)):
+		for y in range(int(l)):
+			if a[x][y] == 1:
+				try:
+					a[x][y+1] = 1
+					a[x][y-1] = 1
+					a[x-1][y] = 1
+					a[x+1][y] = 1
+				except:
+					print ("")
+count = 0
+for x in range(int(k)):
+	for y in range(int(l)):
+		if a[x][y] == 0:
+			count = count + 1
+print count
