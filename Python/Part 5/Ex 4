@@ -1,0 +1,3 @@
+#P5 E4
+from p5e1 import countLines
+countLines("Fail")
