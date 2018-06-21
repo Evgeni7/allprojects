@@ -1,3 +1,5 @@
+<?php /* Template Name: template */ ?>
+
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -26,6 +28,16 @@ Dot 2: LAT: <input type="text" name="lat2"> LNG: <input type="text" name="lng2">
 
 
 <?php
+//$lat1 = 0
+//$lat2 = 0
+//$lng1 = 0
+//$lng2 = 0
+//$country = null
+//$region = null
+
+
+
+
 
 $link = mysqli_connect('localhost', 'wordpressuser', 'Passw0rd!', 'map');
 if (!$link) 
@@ -147,7 +159,7 @@ else
         var marker = new google.maps.Marker({
             position: location,
             map: map,
-	    title: '<?php echo $lat; ?>   <?php echo $lng; ?>'
+	    title: '<?php echo $result['url']; ?>'
         });
     <?php } ?>
 
