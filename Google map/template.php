@@ -17,13 +17,49 @@
 
 </head>
 <body>
+
+<div id="header-image" class="custom-header " style="background: url(http://localhost/wp-content/themes/minimalisticky/images/header-bg.png); background-size: cover;">
+<div class="header-wrapper">
+  <div class="site-branding-header">
+      <p class="site-title">
+                 </p>
+ 
+</div>
+
+<div class="top-bar-title">
+
+                  <div class="site-branding">
+
+                   
+                                        <p class="site-title"><a href="http://localhost/" rel="home">Evgeni</a></p>
+                   
+</div>
+
+<div class="site-description" >
+<br>
+       
+ WordPress
+</div>
+<br><br>
+ 
+
 <form method="post">
 Country: <input type="text" name="country">
 Region: <input type="text" name="region"><br>
 Dot 1: LAT: <input type="text" name="lat1"> LNG: <input type="text" name="lng1"><br>
 Dot 2: LAT: <input type="text" name="lat2"> LNG: <input type="text" name="lng2">
 <input type="submit">
-</form>
+</form>   
+<br>
+
+
+</div>
+</div>
+</div>
+
+
+
+
 
 
 
@@ -152,7 +188,7 @@ else
         var marker = new google.maps.Marker({
             position: location,
             map: map,
-	    title: '<?php echo $result['url']; ?>'
+	    title: '<?php echo $result['url']; echo " ", $result['lat']," "; echo $result['lng'] ?>'
         });
     <?php } ?>
 
