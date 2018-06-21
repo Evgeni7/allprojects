@@ -8,7 +8,7 @@ import json
 from pprint import pprint
 import MySQLdb
 
-#cycle through float cordinates
+#cycle through cordinates with float step
 #-------------------------------------------
 #def frange(start, stop, step):
 #     k = start
@@ -20,12 +20,13 @@ import MySQLdb
 #for h in frange (23.0, 33.0, 0.3):
 #	for i in frange (102.0, 120.0, 0.3):
 #-------------------------------------------
-
-
+#cycle through cordinates with a step of 1
+#-------------------------------------------
 h = 0
 i = 0
 for h in xrange (-180, 180):
 	for i in xrange (-180, 180):
+#-------------------------------------------
 		response = requests.get("http://api.apixu.com/v1/search.json?key=cf20be730e4a4502a2575501181506&q={0},{1}".format(i,h))
 		print(h)
 		print(i)
