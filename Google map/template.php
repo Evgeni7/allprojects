@@ -28,16 +28,6 @@ Dot 2: LAT: <input type="text" name="lat2"> LNG: <input type="text" name="lng2">
 
 
 <?php
-//$lat1 = 0
-//$lat2 = 0
-//$lng1 = 0
-//$lng2 = 0
-//$country = null
-//$region = null
-
-
-
-
 
 $link = mysqli_connect('localhost', 'wordpressuser', 'Passw0rd!', 'map');
 if (!$link) 
@@ -50,14 +40,17 @@ if (!$link)
 
 if ($_POST["lat1"] > $_POST["lat2"])
 {
-echo "LAT of Dot 1 should be less then LAT of Dot 2";
+	$changer = $_POST["lat1"];
+	$_POST["lat1"] = $_POST["lat2"];
+	$_POST["lat2"] = $changer;
 }
-elseif ($_POST["lng1"] > $_POST["lng2"])
+if ($_POST["lng1"] > $_POST["lng2"])
 {
-echo "LNG of Dot 1 should be less then LNG of Dot 2";
+	$changer = $_POST["lng1"];
+	$_POST["lng1"] = $_POST["lng2"];
+	$_POST["lng2"] = $changer;
 }
-else
-{
+
 
 if ($_POST["country"] == null)
 {
@@ -89,7 +82,7 @@ if ($_POST["country"] == null)
 			}
 			else
 			{
-				$maxid = "SELECT * FROM list where region = '".$_POST["region "]."' and lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
+				$maxid = "SELECT * FROM list where region = '".$_POST["region"]."' and lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
 				$result = $link->query($maxid);
 				$row = $result->fetch_assoc();
 			}
@@ -129,7 +122,7 @@ else
 			}
 		}
 }
-}
+
 
 
 
