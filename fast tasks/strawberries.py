@@ -19,31 +19,30 @@ b[int(sb21)-1][int(sb22)-1] = 1
 
 
 for i in range(int(r)):
-	print i
 	for x in range(int(k)):
 		for y in range(int(l)):
 			try:
-				if a[x][y] == i+1:
+				if a[x][y] == i + 1:
 					if a[x+1][y] == 0:
-						b[x+1][y]= i+2
+						b[x+1][y]= i + 2
 			except IndexError:
 				pass
 			try:			
-				if a[x][y+1] == i+1:
+				if a[x][y+1] == i + 1:
 					if a[x][y] == 0:					
-						b[x][y] = i+2
+						b[x][y] = i + 2
 			except IndexError:
 				pass
 			try:
-				if a[x][y] == i+1:
+				if a[x][y] == i + 1:
 					if a[x][y+1] == 0:
-						b[x][y+1]= i+2
+						b[x][y+1]= i + 2
 			except IndexError:
 				pass
 			try:			
-				if a[x+1][y] == i+1:
+				if a[x+1][y] == i + 1:
 					if a[x][y] == 0:
-						b[x][y] = i+2
+						b[x][y] = i + 2
 			except IndexError:
 				pass
 	a = copy.deepcopy(b)
