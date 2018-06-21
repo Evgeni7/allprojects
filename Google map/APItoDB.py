@@ -7,6 +7,21 @@ import requests
 import json
 from pprint import pprint
 import MySQLdb
+
+#cycle through float cordinates
+#-------------------------------------------
+#def frange(start, stop, step):
+#     k = start
+#     while k < stop:
+#         yield k
+#         k += step
+#
+#
+#for h in frange (23.0, 33.0, 0.3):
+#	for i in frange (102.0, 120.0, 0.3):
+#-------------------------------------------
+
+
 h = 0
 i = 0
 for h in xrange (-180, 180):
