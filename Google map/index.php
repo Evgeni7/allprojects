@@ -15,17 +15,19 @@
 
 </head>
 <body>
-
 <form method="post">
 Country: <input type="text" name="country">
 Region: <input type="text" name="region"><br>
-LAT: <input type="text" name="lat">
-LNG: <input type="text" name="lng">
+Dot 1: LAT: <input type="text" name="lat1"> LNG: <input type="text" name="lng1"><br>
+Dot 2: LAT: <input type="text" name="lat2"> LNG: <input type="text" name="lng2">
 <input type="submit">
 </form>
 
 
+
 <?php
+
+	
 $link = mysqli_connect('localhost', 'wordpressuser', 'Passw0rd!', 'map');
 if (!$link) 
 {
@@ -33,32 +35,94 @@ if (!$link)
 	echo $output;	
 	exit();
        
-
-
 }
-if ($_POST["region"] == null){
-$maxid = "SELECT * FROM list where country = '".$_POST["country"]."' or lat = '".$_POST["lat"]."' or lng = '".$_POST["lng"]."'";
-$result = $link->query($maxid);
-$row = $result->fetch_assoc();
-echo $_POST["country"];
-echo " ";
-echo $_POST["lat"];
-echo " ";
-echo $_POST["lng"];
+
+if ($_POST["lat1"] > $_POST["lat2"])
+{
+echo "LAT of Dot 1 should be less then LAT of Dot 2";
+}
+elseif ($_POST["lng1"] > $_POST["lng2"])
+{
+echo "LNG of Dot 1 should be less then LNG of Dot 2";
 }
 else
 {
-$maxid = "SELECT * FROM list where region = '".$_POST["region"]."' or country = '".$_POST["country"]."' or lat = '".$_POST["lat"]."' or lng = '".$_POST["lng"]."'";
-$result = $link->query($maxid);
-$row = $result->fetch_assoc();
-echo $_POST["country"];
-echo " ";
-echo $_POST["region"];
-echo " ";
-echo $_POST["lat"];
-echo " ";
-echo $_POST["lng"];
+
+if ($_POST["country"] == null)
+{
+	if ($_POST["region"] == null)
+		{
+			if ($_POST["lng2"] == 0)
+			{
+				$maxid = "SELECT * FROM list";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+				echo "Showing all results";
+			}
+			else
+			{
+				$maxid = "SELECT * FROM list where lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+				echo "Showing results in the (", $_POST["lat1"],"), (",$_POST["lng1"],") - (",$_POST["lat2"],"), (",$_POST["lng2"], ") square";
+			}
+		
+		}
+	else
+		{
+			if ($_POST["lng2"] == 0)
+			{
+				$maxid = "SELECT * FROM list where region = '".$_POST["region"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+			else
+			{
+				$maxid = "SELECT * FROM list where region = '".$_POST["region "]."' and lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+		}
 }
+else
+{
+	if ($_POST["region"] == null)
+		{
+			if ($_POST["lng2"] == 0)
+			{
+				$maxid = "SELECT * FROM list where country = '".$_POST["country"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+			else
+			{
+				$maxid = "SELECT * FROM list where country = '".$_POST["country"]."' and lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+		
+		}
+	else
+		{
+			if ($_POST["lng2"] == 0)
+			{
+				$maxid = "SELECT * FROM list where country = '".$_POST["country"]."' and region = '".$_POST["region"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+			else
+			{
+				$maxid = "SELECT * FROM list where country = '".$_POST["country"]."' and region = '".$_POST["region"]."' and lat between '".$_POST["lat1"]."' and '".$_POST["lat2"]."' and lng between '".$_POST["lng1"]."' and '".$_POST["lng2"]."'";
+				$result = $link->query($maxid);
+				$row = $result->fetch_assoc();
+			}
+		}
+}
+}
+
+
+
+
 
 
 ?>
@@ -75,12 +139,7 @@ echo $_POST["lng"];
           zoom: 3
         });
 	 
-/*	  var marker = new google.maps.Marker({
-          position: {lat: <?php echo $lat[1]; ?>, lng: <?php echo $lng; ?>},
-          map: map,
-          title: '<?php echo $lat; ?>   <?php echo $lng; ?>'
-        });
-*/
+
 
  <?php
  foreach($result as $result){
