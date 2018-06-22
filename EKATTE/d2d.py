@@ -23,7 +23,7 @@ while i <= len(list):
 	words = list[i].split(",")
 	print words[3]
 	try:
-		x.execute("insert into Ek_atte values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(words[0],words[1],words[2],words[3],words[4],words[5],words[6],words[7],words[8],words[9],words[10],words[11],words[12]))
+		x.execute("insert into Ek_atte values (%s,%s,N%s,N%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(words[0],words[1],words[2],words[3],words[4],words[5],words[6],words[7],words[8],words[9],words[10],words[11],words[12]))
 		conn.commit()
 	except:
 	   	conn.rollback()
