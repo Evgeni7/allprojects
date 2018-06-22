@@ -1,4 +1,4 @@
-#Table created by "create table Ek_atte (number int, ekatte int primary key, tvm varchar(255), name varchar(255), oblast varchar(255), obstina varchar(255), kmetstvo varchar(255), kind int, category int, altitude int, document int, tsb varchar(255), abc int);"
+#Table created by "create table Ek_atte (number int, ekatte int primary key, tvm nvarchar(255), name nvarchar(255), oblast nvarchar(255), obstina nvarchar(255), kmetstvo nvarchar(255), kind int, category int, altitude int, document int, tsb nvarchar(255), abc int);"
 
 import MySQLdb
 import csv
