@@ -22,13 +22,14 @@ if (!$link)
 $entry = $_POST['entry'];
 if ($entry == null)
 {
-	$maxid = "select * from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast";
+	$maxid = "select *, sel.name AS namee from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast";
 	$result = $link->query($maxid);
 	$row = $result->fetch_assoc();
+
 }
 else
 {
-	$maxid = "select * from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast and sel.name = '$entry'";
+	$maxid = "select *, sel.name AS namee from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast and sel.name = '$entry'";
 	$result = $link->query($maxid);
 	$row = $result->fetch_assoc();
 }
@@ -71,13 +72,15 @@ else
 ?>
 <div name="result" style="width: 100%; height:80%; top 20%; ">
 <?php
+echo "ekatte | Name | District | Municipality";
+?><br><?php
 foreach ($result as $result)
 {
 	echo $result['num'];
 	echo " ";
 	echo $result['tvm'];
 	echo " ";
-	echo $result['name'];
+	echo $result['namee'];
 	echo " ";
 	echo $result['oblast'];
 	echo " ";
