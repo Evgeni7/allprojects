@@ -1,0 +1,33 @@
+#obstina
+import pandas as pd
+import MySQLdb
+import csv
+
+data_xls = pd.read_excel('Ek_obst.xls', 'Ek_obst', index_col=None)
+data_xls.to_csv('ekatte.csv', encoding='utf-8')
+
+
+conn = MySQLdb.connect(host= "localhost",
+	          user="wordpressuser",
+	          passwd="Passw0rd!",
+	          db="ekatte")
+x = conn.cursor()
+
+with open('ekatte.csv', mode='r') as f:
+	list = []
+   	for word in f:
+        	list.append(word)
+		
+
+i = 0
+while i < len(list):
+	words = list[i].split(",")	
+	wordy = words[1][0]+words[1][1]+words[1][2]
+	try:
+		x.execute("insert into obst values (N%s,N%s,N%s)",(words[1],wordy,words[3]))
+		print words[0] + words[1] + words[2] + words[3]		
+		conn.commit()
+	except:
+	   	conn.rollback()
+		
+	i = i + 1
