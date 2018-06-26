@@ -2,7 +2,9 @@ import pandas as pd
 #stands for "Python Data Analysis Library"
 #takes data and creates object with rows and columns that looks similar to Excel
 import MySQLdb
+#used to connect to DB
 import csv
+#used to write fail to .csv
 
 
 data_xls = pd.read_excel('Ek_atte.xls', 'Ek_atte', index_col=None)
