@@ -1,0 +1,32 @@
+#oblast
+import pandas as pd
+import MySQLdb
+import csv
+
+data_xls = pd.read_excel('Ek_obl.xls', 'Ek_obl', index_col=None)
+data_xls.to_csv('ekatte.csv', encoding='utf-8')
+
+
+conn = MySQLdb.connect(host= "localhost",
+	          user="wordpressuser",
+	          passwd="Passw0rd!",
+	          db="ekatte")
+x = conn.cursor()
+
+with open('ekatte.csv', mode='r') as f:
+	list = []
+   	for word in f:
+        	list.append(word)
+		
+
+i = 0
+while i < len(list):
+	words = list[i].split(",")
+	print words[1]+ " " +words[3]
+	try:
+		x.execute("insert into obl values (N%s,N%s)",(words[1],words[3]))
+		conn.commit()
+	except:
+	   	conn.rollback()
+		
+	i = i + 1
