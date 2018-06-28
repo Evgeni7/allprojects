@@ -18,9 +18,6 @@ if (!$link)
 	echo $output;	
 	exit();
 }
-$obst = 0;
-$obl = 0;
-$selishta = 0;
 
 $maxid1 = "select oblast from obl";
 $result1 = $link->query($maxid1);
@@ -28,7 +25,7 @@ $row1 = $result1->fetch_assoc();
 foreach ($result1 as $result1){
 $obl += 1;
 }
-echo "$obl"; echo " области, ";
+echo $obl; echo " области, ";
 
 $maxid2 = "select obstina from obst";
 $result2 = $link->query($maxid2);
@@ -36,7 +33,7 @@ $row2 = $result2->fetch_assoc();
 foreach ($result2 as $result2){
 $obst += 1;
 }
-echo "$obst"; echo " общини и ";
+echo $obst; echo " общини и ";
 
 $maxid3 = "select * from sel";
 $result3 = $link->query($maxid3);
@@ -44,16 +41,22 @@ $row3 = $result3->fetch_assoc();
 foreach ($result3 as $result3){
 $selishta += 1;
 }
-echo "$selishta"; echo " селища.";
+echo $selishta -1; echo " селища.";
+
+?>
+<br>
+<br>
+<?php
+
 
 
 #$select = $_POST['search'];
 $entry = $_POST['entry'];
 if ($entry == null)
 {
-	$maxid = "select *, sel.name AS namee from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast";
-	$result = $link->query($maxid);
-	$row = $result->fetch_assoc();
+#	$maxid = "select *, sel.name AS namee from sel inner join obst join obl where sel.obstina = obst.obstina and obst.oblast = obl.oblast";
+#	$result = $link->query($maxid);
+#	$row = $result->fetch_assoc();
 }
 else
 {
@@ -131,16 +134,17 @@ foreach ($result as $result)
 <br>
 <?php
 }
-
+if ($var1 != 0){
 echo $var1;
 if ($var1 != 1)
 {
-    echo " селища и ";
+    echo " селища ";
 }
 else
 {
-    echo " селище и ";
-}
+    echo " селище ";
+}}
+if ($var2 != 0){
 echo $var2;
 if ($var2 != 1)
 {
@@ -149,7 +153,7 @@ if ($var2 != 1)
 else
 {
     echo " град.";
-}
+}}
 
 ?>
 </div>
