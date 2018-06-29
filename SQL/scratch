@@ -64,3 +64,9 @@ Select name from ships join classes where ships.class = classes.class and displa
 
 Select model, type from product where model not like '%[^a-z]%' or model not like '%[^0-9.]%';
 
+
+37
+
+Select classes.class, ships.name from classes join ships where ships.class = classes.class group by classes.class having count(ships.name)=1 union select classes.class, ships.name from classes join ships join outcomes where ships.class = classes.class and outcomes.ship = ships.name group by classes.class having  count(outcomes.ship) = 1;
+
+select distinct classes.class, ships.name from classes, ships, outcomes where classes.class = ships.class union select distinct outcomes.ship, ships.name from classes, ships, outcomes where outcomes.ship = ships.class;
