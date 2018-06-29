@@ -1,0 +1,3 @@
+Select ship from outcomes 
+where result = 'sunk' 
+and battle = 'north atlantic';
