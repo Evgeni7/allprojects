@@ -1,0 +1,66 @@
+#"!!!" after a number means query produces correct results but fails on second DB check
+
+
+8
+
+select distinct maker from product join pc where product.model = pc.model except select distinct maker from product join laptop where product.model = laptop.model;
+
+
+16!!!
+
+select max(model) as 'model', min(model) as 'model', speed, ram from pc group by speed, ram having max(model) > min(model);
+
+
+20
+
+select distinct maker, count(pc.model) from Product join pc where product.model=pc.model group by maker having count(pc.model)>=3;
+select maker, count(distinct pc.model) from product join pc where pc.model = product.model group by maker having count(pc.model)>=3;
+
+
+23
+
+Select distinct maker from product join pc where pc.speed>750 and product.model = pc.model in (select maker from product join laptop where laptop.speed>750 and product.model = laptop.model);
+
+
+24
+
+Select product.model from product;
+
+
+26
+
+select avg(price) from (select avg(price), maker from pc join product where product.model = pc.model and maker='a' union all Select avg(price), maker from laptop join product where product.model = laptop.model and maker='a');
+
+select avg(pc.price), avg(laptop.price) from product join pc join laptop where product.maker = 'a' and product.model = pc.model and product.model = laptop.model;
+
+select * from ((select avg(pc.price) as P, avg(laptop.price) as PP from product join pc join laptop where product.maker = 'a') as T);
+
+
+27!!!
+
+select maker, avg(hd) from pc join product where product.maker in (Select distinct maker from product where product.maker in (select maker from product join pc where product.model = pc.model) and maker in (select maker from product join printer where product.model = printer.model)) and product.model = pc.model group by maker;
+
+
+28!!!
+
+Select count(maker) as qty from product group by maker having count(distinct model)=1;
+
+
+29
+
+select income_o.point, income_o.date, inc, outcome_o.out from Income_o join Outcome_o where income_o.date = outcome_o.date union select income_o.point, income_o.date, inc, outcome_o.out from Income_o join Outcome_o where income_o.inc is null or outcome_o.out is null;
+
+select distinct T.date, T.inc, TT.out from (select * from Income_o) as T, (select * from Outcome_o) as TT where T.date=TT.date;
+
+select income_o.point, income_o.date, income_o.inc, outcome_o.out from income_o join outcome_o where income_o.date = outcome_o.date and income_o.point = outcome_o.point union select income_o.point, income_o.date, income_o.inc, outcome_o.out from income_o join outcome_o where income_o.date != outcome_o.date;
+
+
+34!!!
+
+Select name from ships join classes where ships.class = classes.class and displacement > 35000 and name is not null;
+
+
+35!!!
+
+Select model, type from product where model not like '%[^a-z]%' or model not like '%[^0-9.]%';
+
