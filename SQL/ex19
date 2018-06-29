@@ -1,0 +1,4 @@
+select maker, avg(screen) 
+from product, laptop 
+where product.model = laptop.model 
+group by maker;
