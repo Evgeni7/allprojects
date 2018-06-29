@@ -1,0 +1,7 @@
+Select ships.name 
+from classes join ships 
+where classes.class = ships.name 
+union 
+Select outcomes.ship 
+from classes join outcomes 
+where classes.class = outcomes.ship;
