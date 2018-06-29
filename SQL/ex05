@@ -1,0 +1,1 @@
+Select model, speed, hd from PC where price < 600 and cd in ('12x', '24x');
