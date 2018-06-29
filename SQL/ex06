@@ -1,0 +1,1 @@
+select distinct Product.maker, Laptop.speed from Product join Laptop where Product.type = 'laptop' and Laptop.hd >= 10 and product.model = laptop.model;
