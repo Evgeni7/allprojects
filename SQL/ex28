@@ -1,0 +1,4 @@
+Select count(maker) as qty 
+from product 
+group by maker 
+having count(distinct model)=1;
