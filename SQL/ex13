@@ -1,0 +1,2 @@
+select avg(pc.speed) from pc join product 
+where pc.model in (select model from Product where maker = 'A');
