@@ -1,0 +1,4 @@
+Select distinct outcomes.ship, outcomes.battle 
+from ships join battles join outcomes 
+where outcomes.battle = battles.name 
+and outcomes.result = 'sunk';
