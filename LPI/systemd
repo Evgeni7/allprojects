@@ -1,0 +1,54 @@
+#Да се напише скрипт, който:
+#
+#    през 60 минути да принтира на stderr или stdout някакъв текст.
+#    да работи постоянно.
+#    да се направи като systemd service.
+#    при пускане да прави файл /var/run/<myservice>/<myservice>.pid (където <myservice> е името на сървиса ви) в който да записва само и единствено своя PID като string (os.getpid())
+#    в конфигурационния файл на systemd unit-a, да се добави PIDFile опция сочеща към абсолютния път на този pid файл
+#    сървиса трябва да е със съответните привилегии (или да се изпълнява като съответния user), така че да има право да пише и чете във /var/run
+#    сървиса трябва да знае къде да пренасочва stdout & stderr, за което са StandardOutput & StandardError опциите, за да можем да четем през journalctl
+#    сървиса трябва да е enable-нат от systemd, така че да се пуска всеки път при boot
+
+
+
+
+#/etc/systemd/system
+#
+#[Unit]
+#After=mysql.service
+#
+#[Service]
+#ExecStart='/home/evgeni/environments/Python3/asd.py'
+#StandardOutput=journal
+#StandardError=syslog
+#PIDFile=/var/run/myscript.pid
+#
+#[Install]
+#WantedBy=default.target
+
+
+
+
+#!/usr/bin/python3
+from __future__ import print_function
+from datetime import datetime, timedelta
+import time
+import sys
+import os
+	
+
+pid = str(os.getpid())
+print(pid)
+f= open("/var/run/myscript.pid","w+")
+f.write(pid)
+f.close()
+
+
+while 1:
+	print (datetime.now(), " I am still working", file=sys.stderr)		
+
+	dt = datetime.now() + timedelta(seconds=3600)
+
+	while datetime.now() < dt:
+		time.sleep(1)
+
