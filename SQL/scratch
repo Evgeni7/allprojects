@@ -20,6 +20,7 @@ select maker, count(distinct pc.model) from product join pc where pc.model = pro
 23
 
 Select distinct maker from product join pc where pc.speed>750 and product.model = pc.model in (select maker from product join laptop where laptop.speed>750 and product.model = laptop.model);
+select distinct maker from product join pc join laptop where pc.speed > 750 in select maker from product join laptop where laptop.speed > 750;
 
 
 24
@@ -70,3 +71,14 @@ Select model, type from product where model not like '%[^a-z]%' or model not lik
 Select classes.class, ships.name from classes join ships where ships.class = classes.class group by classes.class having count(ships.name)=1 union select classes.class, ships.name from classes join ships join outcomes where ships.class = classes.class and outcomes.ship = ships.name group by classes.class having  count(outcomes.ship) = 1;
 
 select distinct classes.class, ships.name from classes, ships, outcomes where classes.class = ships.class union select distinct outcomes.ship, ships.name from classes, ships, outcomes where outcomes.ship = ships.class;
+
+
+39!!!
+
+Select ships.name from ships join outcomes join battles where result = 'damaged' and ships.name = outcomes.ship and exists (select name from battles) having count(battles.date)>1;
+
+
+49!!!
+
+Select name from ships join classes where ships.class=classes.class and bore = 16 union (select ship from outcomes join ships join classes where outcomes.ship= ships.name and ships.class = classes.class and bore = 16);
+
