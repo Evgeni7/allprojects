@@ -1,0 +1,5 @@
+Select distinct battles.name 
+from battles join ships join outcomes 
+where battles.name = outcomes.battle 
+and outcomes.ship = ships.name 
+and ships.class = 'Kongo';
