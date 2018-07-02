@@ -11,7 +11,7 @@
 
 
 
-
+#####/etc/systemd/system/myscript.service
 #/etc/systemd/system
 #
 #[Unit]
@@ -44,11 +44,23 @@ f.write(pid)
 f.close()
 
 
-while 1:
-	print (datetime.now(), " I am still working", file=sys.stderr)		
 
-	dt = datetime.now() + timedelta(seconds=3600)
+aaa=0
+while (aaa == 0):
 
-	while datetime.now() < dt:
-		time.sleep(1)
+    with open("/home/evgeni/environments/myfile.txt", "a") as myfile:
+        myfile.write("hehehehehehe")
+
+
+    print ("hehehe", file=sys.stderr)
+    time.sleep(10)
+
+
+#while 1:
+#	print (datetime.now(), " I am still working", file=sys.stderr)		
+#
+#	dt = datetime.now() + timedelta(seconds=3600)
+#
+#	while datetime.now() < dt:
+#		time.sleep(1)
 
