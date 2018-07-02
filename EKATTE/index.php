@@ -41,13 +41,12 @@ $row3 = $result3->fetch_assoc();
 foreach ($result3 as $result3){
 $selishta += 1;
 }
-echo $selishta -1; echo " селища.";
+echo $selishta; echo " селища.";
 
 ?>
 <br>
 <br>
 <?php
-
 
 
 #$select = $_POST['search'];
