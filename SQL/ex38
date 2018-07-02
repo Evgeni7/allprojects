@@ -1,0 +1,6 @@
+Select distinct country 
+from classes where type = 'bb' 
+and country in 
+(select distinct country 
+from classes 
+where type ='bc');
