@@ -1,0 +1,4 @@
+select classes.class, name, country 
+from ships join classes 
+where numGuns>=10 
+and classes.class = ships.class;
