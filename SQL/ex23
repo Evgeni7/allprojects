@@ -1,0 +1,9 @@
+select distinct maker 
+from product join pc 
+where product.model=pc.model 
+and pc.speed >= 750 
+and maker in 
+(select maker 
+from product join laptop 
+where product.model=laptop.model 
+and laptop.speed>=750);
