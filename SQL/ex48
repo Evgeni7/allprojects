@@ -1,0 +1,9 @@
+select class from ships 
+where name in 
+(select ship from outcomes 
+where result = 'sunk') 
+union 
+select class from classes 
+where class in 
+(select ship from outcomes 
+where result = 'sunk');
