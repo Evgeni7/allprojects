@@ -1,0 +1,12 @@
+select model from pc where price = 
+(select max(maxp) from (select max(price) as maxp from pc 
+union (select max(price) as maxp from printer) 
+union (select max(price) as maxp from laptop)) as T) 
+union select model from laptop where price = 
+(select max(maxp) from (select max(price) as maxp from pc 
+union (select max(price) as maxp from printer) 
+union (select max(price) as maxp from laptop)) as T) 
+union select model from printer where price = 
+(select max(maxp) from (select max(price) as maxp from pc 
+union (select max(price) as maxp from printer) 
+union (select max(price) as maxp from laptop)) as T);
