@@ -1,0 +1,7 @@
+select distinct maker 
+from product 
+where maker not in 
+(select distinct maker 
+from product 
+where type = 'laptop') 
+and type = 'pc';
