@@ -1,0 +1,7 @@
+select name from ships join classes 
+where ships.class = classes.class 
+and bore = 16 
+union 
+select ship from outcomes join classes 
+where ship = class 
+and bore = 16;
