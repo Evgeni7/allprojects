@@ -1,0 +1,9 @@
+Select income_o.point, income_o.date, income_o.inc, outcome_o.out 
+from income_o left join outcome_o 
+on income_o.date = outcome_o.date 
+and income_o.point = outcome_o.point 
+union 
+select outcome_o.point, outcome_o.date, income_o.inc, outcome_o.out 
+from outcome_o left join income_o 
+on income_o.date = outcome_o.date 
+and income_o.point = outcome_o.point;
