@@ -1,0 +1,5 @@
+select distinct a.model, b.model, a.speed, a.ram 
+from pc as a, pc as b 
+where a.ram=b.ram 
+and a.speed=b.speed 
+and a.model>b.model;
